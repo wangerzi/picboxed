@@ -20,6 +20,7 @@ jQuery.picboxed插件，用于放大图片，适用于各种需要对图片进�
 1. 引用 js/picboxed.js 加载picboxed插件
 1. 在HTML的`img`标签中使用`class="picboxed" data-header='头部信息' data-footer='尾部信息'`即可
 1. 如果图片是动态添加的话，需要调用 `$('.picboxed').picboxed();`。  
+
 # EFFECT
 - 鼠标放在图片上有放大镜手势
 - 点击图片，图片以合适的速度全屏，并显示头部和尾部信息。

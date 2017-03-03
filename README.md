@@ -15,9 +15,9 @@ jQuery.picboxed插件，用于放大图片，适用于各种需要对图片进�
 	|---demo/-demo_1.html			#与materialze结合的样例
 	
 # USAGE
-1. 引用 css/picboxed.css 加载样式表
-1. 引用 js/jquery.1.2.1.js 加载jQuery，版本1.1以上
-1. 引用 js/picboxed.js 加载picboxed插件
+1. 引用 `css/picboxed.css` 加载样式表
+1. 引用 `js/jquery.1.2.1.js` 加载jQuery，版本1.1以上
+1. 引用 `js/picboxed.js` 加载picboxed插件
 1. 在HTML的`img`标签中使用`class="picboxed" data-header='头部信息' data-footer='尾部信息'`即可
 1. 如果图片是动态添加的话，需要调用 `$('.picboxed').picboxed();`。  
 

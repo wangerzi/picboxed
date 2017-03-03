@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>demo_1</title>
+		<link rel="stylesheet" href="../css/carousel.css" /><!--materialze框架的carousel插件-->
+		<link rel="stylesheet" href="../../css/picboxed.css" /><!--本插件的CSS文件-->
+		<style>
+			.demo{
+				width:100%;
+			}
+			.demo td{
+				padding:10px;
+			}
+			.demo img{
+				width:400px;
+			}
+		</style>
+		
+		<script type="text/javascript" src="../js/jquery-2.1.1.js"></script><!--jQuery文件-->
+		<script type="text/javascript" src="../js/carousel.js"></script><!--materialze框架carousel.js文件-->
+		<script type="text/javascript" src="../js/picboxed.js"></script><!--本插件的js文件-->
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$('.carousel-m').carousel_m();//这里的用法被我改了一下，避免冲突。
+		});
+		</script>
+	</head>
+	<body>
+		<h2 style="text-align: center;">与materialize的carousel插件混合</h2>
+		<ul class="carousel-m">
+			<li class="carousel-item">
+				<a href="#!"><img src="images/1.jpg" class="picboxed" data-header="展示图片" data-footer="1/10"></a><!--将图片加上.picboxed即可-->
+			</li>
+			<li class="carousel-item">
+				<a href="#!"><img src="images/2.jpg" class="picboxed" data-header="展示图片" data-footer="2/10"></a>
+			</li>
+			<li class="carousel-item">
+				<a href="#!"><img src="images/3.jpg" class="picboxed" data-header="展示图片" data-footer="3/10"></a>
+			</li>
+			<li class="carousel-item">
+				<a href="#!"><img src="images/4.jpg" class="picboxed" data-header="展示图片" data-footer="4/10"></a>
+			</li>
+			<li class="carousel-item">
+				<a href="#!"><img src="images/5.jpg" class="picboxed" data-header="展示图片" data-footer="5/10"></a>
+			</li>
+			<li class="carousel-item">
+				<a href="#!"><img src="images/6.jpg" class="picboxed" data-header="展示图片" data-footer="6/10"></a>
+			</li>
+			<li class="carousel-item">
+				<a href="#!"><img src="images/7.jpg" class="picboxed" data-header="展示图片" data-footer="7/10"></a>
+			</li>
+			<li class="carousel-item">
+				<a href="#!"><img src="images/8.jpg" class="picboxed" data-header="展示图片" data-footer="8/10"></a>
+			</li>
+			<li class="carousel-item">
+				<a href="#!"><img src="images/9.jpg" class="picboxed" data-header="展示图片" data-footer="9/10"></a>
+			</li>
+			<li class="carousel-item">
+				<a href="#!"><img src="images/10.jpg" class="picboxed" data-header="展示图片" data-footer="10/10"></a>
+			</li>
+		</ul>
+		<h2 style="text-align: center;">直接使用</h2>
+		<table class="demo">
+			<tbody>
+				<tr>
+					<td><img src="images/1.jpg" class="picboxed" alt="" data-header="展示图片" data-footer="1/9" /></td>
+					<td><img src="images/2.jpg" class="picboxed" alt="" data-header="展示图片" data-footer="2/9" /></td>
+					<td><img src="images/3.jpg" class="picboxed" alt="" data-header="展示图片" data-footer="3/9" /></td>
+				</tr>
+				<tr>
+					<td><img src="images/4.jpg" class="picboxed" alt="" data-header="展示图片" data-footer="3/9" /></td>
+					<td><img src="images/5.jpg" class="picboxed" alt="" data-header="展示图片" data-footer="4/9" /></td>
+					<td><img src="images/6.jpg" class="picboxed" alt="" data-header="展示图片" data-footer="5/9" /></td>
+				</tr>
+				<tr>
+					<td><img src="images/7.jpg" class="picboxed" alt="" data-header="展示图片" data-footer="6/9" /></td>
+					<td><img src="images/8.jpg" class="picboxed" alt="" data-header="展示图片" data-footer="7/9" /></td>
+					<td><img src="images/9.jpg" class="picboxed" alt="" data-header="展示图片" data-footer="8/9" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

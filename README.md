@@ -1,5 +1,5 @@
 # picboxed penguin for Jquery
----
+jQuery 图片盒子插件
 # OVERVIEW
 jQuery.picboxed插件，用于放大图片，适用于各种需要对图片进行全屏放大操作的场景。
 本插件灵感来源[materialze](http://materializecss.com)的materialbox插件，但在materialze环境和非materialze环境下部署时都遇到了一些问题，于是就自己写了一个图片放大插件，依赖jQuery库。

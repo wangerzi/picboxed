@@ -18,12 +18,13 @@ jQuery.picboxed插件，用于放大图片，适用于各种需要对图片进�
 1. 引用 css/picboxed.css 加载样式表
 1. 引用 js/jquery.1.2.1.js 加载jQuery，版本1.1以上
 1. 引用 js/picboxed.js 加载picboxed插件
-1. 在HTML的`img`标签中使用`class="picboxed"`即可
-1. 如果图片是动态添加的话，需要调用 `$('.picboxed').picboxed();`。
+1. 在HTML的`img`标签中使用`class="picboxed" data-header='头部信息' data-footer='尾部信息'`即可
+1. 如果图片是动态添加的话，需要调用 `$('.picboxed').picboxed();`。  
 # EFFECT
 - 鼠标放在图片上有放大镜手势
 - 点击图片，图片以合适的速度全屏，并显示头部和尾部信息。
 - 鼠标放在放大后的图片上有缩小手势
 - 点击放大的图片，图片以合适的速度缩小并定位到原图片所在位置。
-![Markdown](http://i1.piimg.com/1949/c2e3d88921b1105e.jpg)
+![Markdown](http://i1.piimg.com/1949/c2e3d88921b1105e.jpg)  
+
 ![Markdown](http://i1.piimg.com/1949/6ea36cd0e9448aff.jpg)

@@ -3,11 +3,11 @@
  * 
  * Author:Jeffrey Wang
  *
- * Version:v1.0.0
+ * Version:v1.1.0
  *
  * Usage: <img class="picboxed" src="..." data-header="头部信息" data-footer="尾部信息" >，动态添加图片时需要自行初始化：$(...).picboxed();
  *
- * Info: 灵感来源materialze的materiabox插件，但在实际部署中遇到了一些问题，于是就重写了，不依赖其他库。
+ * Info: 灵感来源materialze的materiabox插件，但在实际部署中遇到了一些问题，于是就重写了，不依赖除jQuery以外的其他库。
  */
 (function($){
 	$.fn.picboxed=function(){
@@ -48,10 +48,10 @@
 				override = $('<div></div>').addClass('picboxed-override').css({
 					width:screenWidth,
 					height:screenHeight,
-					opacity:0,
+					//opacity:0,								#背景淡入总感觉不和谐。
 				})
 				.append('<div class="img-header">'+header+'</div>')
-				.animate({opacity:1},'fast')
+				//.animate({opacity:1},'normal')
 				.append(origin.clone().css({
 					width:oldWidth,
 					height:oldHeight,
@@ -59,14 +59,10 @@
 					left:origin.offset().left
 				}))//放置到展区中，设置css是为了过渡平缓，从原图位置开始动画。
 				.append('<div class="img-footer">'+footer+'</div>')
-				.click(function(){//放大后的点击，直接返回。
+				.click(function(){
 					returnToOrigin();
 				});
-				//滚动即退出全屏。
-				$(window).scroll(function(){
-					returnToOrigin();
-				});
-				
+
 				clone = $("body").append(override).find('img.picboxed:last');
 				
 				clone
@@ -78,13 +74,81 @@
 					top:(screenHeight - newHeight)/2,
 					left:(screenWidth - newWidth)/2,
 				},'slow');
+
+				var override = $("body .picboxed-override:last");
+				//滚动即放大或缩小。
+				if(document.addEventListener){ document.addEventListener('DOMMouseScroll',scrollFunc,false);}
+				window.onmousewheel=document.onmousewheel=scrollFunc;//IE/Opera/Chrome
 			});
+			//滚动即放大或缩小。
+			var scrollFunc = function(e){
+				//e.preventDefault();//这句话加上之后，会导致缩小后滚动条不可用。
+
+				//正代表上，负代表下。
+				if(e.wheelDelta){//IE/Opera/Chrome
+					var between=-e.wheelDelta;
+				}else if(e.detail){//Firefox
+					var between=-e.detail*40;
+				}
+
+				//alert(between);
+
+				//重新获取高度和宽度
+				var nowWidth = clone.width();
+				var nowHeight = clone.width();
+				var nowTop = parseInt(clone.css('top'));
+				var nowLeft = parseInt(clone.css('left'));
+
+
+				//between>0代表缩小,between<0代表放大。
+				var slideWidth = nowWidth-2*between;
+				var slideHeight = nowHeight*slideWidth/nowWidth;//按照比例算出
+
+				//鼠标位置
+				var screenX = e.screenX;
+				var screenY = e.screenY;
+				//console.log(screenX+':'+screenY+'and'+nowLeft+':'+nowTop);
+
+				//只能放大图片中的某一块。
+				screenX = screenX<nowLeft?nowLeft:screenX;
+				screenY = screenY<nowTop?nowTop:screenY;
+
+				//console.log(screenX+':'+screenY);
+
+				//居中偏移点加上鼠标的位置到重点的距离，只在放大的时候使用。
+
+				//避免出界。
+				if(between>0 || slideHeight>screenHeight)
+					var slideTop = (screenHeight - slideHeight) / 2;
+				else
+					slideTop = (screenHeight - slideHeight) / 2 + screenHeight/2 - screenY;
+				if(between>0 || slideWidth>screenWidth)
+					var slideLeft = (screenWidth - slideWidth) / 2;
+				else
+					slideLeft = (screenWidth - slideWidth) / 2 + screenWidth/2 - screenX;
+
+
+				//防止过大或过小。
+				if(slideWidth>screenWidth && slideHeight>screenHeight || slideWidth<100 && slideHeight<100)
+					return ;
+
+				clone.stop(true,false).animate({
+					width	: slideWidth,
+					height	: slideHeight,
+					top		: slideTop,
+					left	: slideLeft,
+				},'fast');
+				//returnToOrigin();
+			};
 			
 			//返回页面
 			function returnToOrigin(){
 				override = $("body .picboxed-override:last");
-				clone = override.find('img.picboxed')
-				override.fadeOut('normal');
+				clone = override.find('img.picboxed');
+
+				if(document.removeEventListener){document.removeEventListener('DOMMouseScroll',scrollFunc,false);}
+				window.onmousewheel=document.onmousewhell=function(){};
+				//override.fadeOut('normal');				#背景淡出总感觉不和谐。
 				clone.animate({
 					width:oldWidth,
 					height:oldHeight,

@@ -1,5 +1,5 @@
 # picboxed penguin for Jquery
----
+jQuery 图片盒子插件
 # OVERVIEW
 jQuery.picboxed插件，用于放大图片，适用于各种需要对图片进行全屏放大操作的场景。
 本插件灵感来源[materialze](http://materializecss.com)的materialbox插件，但在materialze环境和非materialze环境下部署时都遇到了一些问题，于是就自己写了一个图片放大插件，依赖jQuery库。
@@ -11,15 +11,21 @@ jQuery.picboxed插件，用于放大图片，适用于各种需要对图片进�
 	|		|--jquery.1.2.1.js		#jQuery文件
 	|---js/-|
 	|		|--picboxed.js			#核心js文件
+	|		|--picboxed.min.js		#压缩过的核心文件
 	|
-	|---demo/-demo_1.html			#与materialze结合的样例
+	|---demo/-demo_1.html			#与materialze插件结合的样例
 	
 # USAGE
-1. 引用 css/picboxed.css 加载样式表
-1. 引用 js/jquery.1.2.1.js 加载jQuery，版本1.1以上
-1. 引用 js/picboxed.js 加载picboxed插件
+1. 引用 `css/picboxed.css` 加载样式表
+1. 引用 `js/jquery.1.2.1.js` 加载jQuery，版本1.1以上
+1. 引用 `js/picboxed.js` 加载picboxed插件
 1. 在HTML的`img`标签中使用`class="picboxed" data-header='头部信息' data-footer='尾部信息'`即可
 1. 如果图片是动态添加的话，需要调用 `$('.picboxed').picboxed();`。  
+
+# VERSION
+1. 2017年4月16日15:42:08	v1.0.0		最初版本，实现全屏放大，并且解决图片的相对/绝对定位导致无法全屏放大的问题。
+1. 2017年4月16日15:42:13	v1.1.0		新增滚轮放大图片指定位置的功能。
+
 # EFFECT
 - 鼠标放在图片上有放大镜手势
 - 点击图片，图片以合适的速度全屏，并显示头部和尾部信息。

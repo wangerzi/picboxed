@@ -3,7 +3,7 @@
  * 
  * Author:Jeffrey Wang
  *
- * Version:v1.1.0
+ * Version:v1.1.1
  *
  * Usage: <img class="picboxed" src="..." data-header="头部信息" data-footer="尾部信息" >，动态添加图片时需要自行初始化：$(...).picboxed();
  *
@@ -109,9 +109,14 @@
 				var screenY = e.screenY;
 				//console.log(screenX+':'+screenY+'and'+nowLeft+':'+nowTop);
 
-				//只能放大图片中的某一块。
+				//只能放大图片中的某一块，不能放大阴影部分。
+				//是否在左侧或上侧
 				screenX = screenX<nowLeft?nowLeft:screenX;
 				screenY = screenY<nowTop?nowTop:screenY;
+
+				//是否在右侧和下侧
+				screenX = screenX>nowWidth+nowLeft?nowWidth+nowLeft:screenX;
+				screenY = screenY>nowHeight+nowTop?nowHeight+nowTop:screenY;
 
 				//console.log(screenX+':'+screenY);
 

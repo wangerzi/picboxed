@@ -3,7 +3,7 @@
  * 
  * Author:Jeffrey Wang
  *
- * Version:v1.1.1
+ * Version:v1.1.2
  *
  * Usage: <img class="picboxed" src="..." data-header="头部信息" data-footer="尾部信息" >，动态添加图片时需要自行初始化：$(...).picboxed();
  *
@@ -153,14 +153,25 @@
 
 				if(document.removeEventListener){document.removeEventListener('DOMMouseScroll',scrollFunc,false);}
 				window.onmousewheel=document.onmousewhell=function(){};
+
+				//返回的正常Top
+				var backTop = origin.offset().top-$(document).scrollTop();
+				var backLeft = origin.offset().left;
+
+				console.log(backTop+':'+backLeft);
+
+				//某些元素被隐藏，无法获取到实时的位置，获取到的是相对页面(0,0)，所以就居中缩小。
+				backTop = backTop==-$(document).scrollTop()?(screenHeight - oldHeight)/2:backTop;
+				backLeft = backLeft==0?(screenWidth - oldWidth)/2:backLeft;
+
 				//override.fadeOut('normal');				#背景淡出总感觉不和谐。
 				clone.animate({
 					width:oldWidth,
 					height:oldHeight,
 					//top:(screenHeight - oldHeight)/2,
 					//left:(screenWidth - oldWidth)/2,
-					top:origin.offset().top-$(document).scrollTop(),//恢复到图片所在的绝对位置。
-					left:origin.offset().left,
+					top:backTop,//恢复到图片所在的绝对位置，或者居中。
+					left:backLeft,
 				},'normal',function(){
 					//console.log((origin.offset().top-$(document).scrollTop())+':'+origin.offset().left);
 					override.remove();

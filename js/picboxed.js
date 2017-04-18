@@ -3,7 +3,7 @@
  * 
  * Author:Jeffrey Wang
  *
- * Version:v1.1.3
+ * Version:v1.1.4
  *
  * Usage: <img class="picboxed" src="..." data-header="头部信息" data-footer="尾部信息" >，动态添加图片时需要自行初始化：$(...).picboxed();
  *
@@ -114,7 +114,7 @@
 				screenX = screenX<nowLeft?nowLeft:screenX;
 				screenY = screenY<nowTop?nowTop:screenY;
 
-				//是否在右侧和下侧
+				//是否在右侧和下侧，避免出界。
 				screenX = screenX>nowWidth+nowLeft?nowWidth+nowLeft:screenX;
 				screenY = screenY>nowHeight+nowTop?nowHeight+nowTop:screenY;
 
@@ -122,15 +122,8 @@
 
 				//居中偏移点加上鼠标的位置到重点的距离，只在放大的时候使用。
 
-				//避免出界。
-				if(between>0 || slideHeight>screenHeight)
-					var slideTop = (screenHeight - slideHeight) / 2;
-				else
-					slideTop = (screenHeight - slideHeight) / 2 + screenHeight/2 - screenY;
-				if(between>0 || slideWidth>screenWidth)
-					var slideLeft = (screenWidth - slideWidth) / 2;
-				else
-					slideLeft = (screenWidth - slideWidth) / 2 + screenWidth/2 - screenX;
+				slideTop = (screenHeight - slideHeight) / 2 + screenHeight/2 - screenY;
+				slideLeft = (screenWidth - slideWidth) / 2 + screenWidth/2 - screenX;
 
 
 				//防止过大或过小。

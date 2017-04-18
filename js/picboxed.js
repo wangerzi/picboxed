@@ -3,7 +3,7 @@
  * 
  * Author:Jeffrey Wang
  *
- * Version:v1.1.2
+ * Version:v1.1.3
  *
  * Usage: <img class="picboxed" src="..." data-header="头部信息" data-footer="尾部信息" >，动态添加图片时需要自行初始化：$(...).picboxed();
  *
@@ -13,7 +13,7 @@
 	$.fn.picboxed=function(){
 		return this.each(function(){
 			origin = $(this);
-			
+
 			if(origin.is('.initialized')){
 				return ;
 			}
@@ -22,16 +22,16 @@
 				origin = $(this);
 				screenWidth = window.innerWidth;
 				screenHeight = window.innerHeight;
-				
+
 				item = origin.parents('.carousel-item:first');
 				//console.log(item.is('.active'));
 				if(item.length && !item.is('.active'))//跟materialze的carousel融合时出现的问题，如果是item并且不是激活状态则不进行操作。
 					return ;
-				
+
 				oldWidth = origin.width();//在图片加载完成后执行，否则获取高度为0。
 				oldHeight = origin.height();
 				//console.log(oldWidth+'+'+oldHeight);
-				
+
 				newWidth = screenWidth * 0.8;
 				newHeight = newWidth * oldHeight / oldWidth;
 				//console.log(newWidth+':'+newHeight);
@@ -43,37 +43,37 @@
 				footer = origin.attr('data-footer');
 				header = typeof header == 'undefined' ? '' : header;
 				footer = typeof footer == 'undefined' ? '' : footer;
-				
+
 				wrap = '<div class="img-wrap"></a>';
 				override = $('<div></div>').addClass('picboxed-override').css({
 					width:screenWidth,
 					height:screenHeight,
 					//opacity:0,								#背景淡入总感觉不和谐。
 				})
-				.append('<div class="img-header">'+header+'</div>')
-				//.animate({opacity:1},'normal')
-				.append(origin.clone().css({
-					width:oldWidth,
-					height:oldHeight,
-					top:origin.offset().top-$(document).scrollTop(),
-					left:origin.offset().left
-				}))//放置到展区中，设置css是为了过渡平缓，从原图位置开始动画。
-				.append('<div class="img-footer">'+footer+'</div>')
-				.click(function(){
-					returnToOrigin();
-				});
+					.append('<div class="img-header">'+header+'</div>')
+					//.animate({opacity:1},'normal')
+					.append(origin.clone().css({
+						width:oldWidth,
+						height:oldHeight,
+						top:origin.offset().top-$(document).scrollTop(),
+						left:origin.offset().left
+					}))//放置到展区中，设置css是为了过渡平缓，从原图位置开始动画。
+					.append('<div class="img-footer">'+footer+'</div>')
+					.click(function(){
+						returnToOrigin();
+					});
 
 				clone = $("body").append(override).find('img.picboxed:last');
-				
+
 				clone
-				.wrap(wrap)
-				.addClass('active')
-				.animate({
-					width : newWidth,
-					height: newHeight,
-					top:(screenHeight - newHeight)/2,
-					left:(screenWidth - newWidth)/2,
-				},'slow');
+					.wrap(wrap)
+					.addClass('active')
+					.animate({
+						width : newWidth,
+						height: newHeight,
+						top:(screenHeight - newHeight)/2,
+						left:(screenWidth - newWidth)/2,
+					},'slow');
 
 				var override = $("body .picboxed-override:last");
 				//滚动即放大或缩小。
@@ -82,7 +82,7 @@
 			});
 			//滚动即放大或缩小。
 			var scrollFunc = function(e){
-				//e.preventDefault();//这句话加上之后，会导致缩小后滚动条不可用。
+				e.preventDefault();//这句话加上之后，会导致缩小后滚动条不可用。
 
 				//正代表上，负代表下。
 				if(e.wheelDelta){//IE/Opera/Chrome
@@ -95,7 +95,7 @@
 
 				//重新获取高度和宽度
 				var nowWidth = clone.width();
-				var nowHeight = clone.width();
+				var nowHeight = clone.height();
 				var nowTop = parseInt(clone.css('top'));
 				var nowLeft = parseInt(clone.css('left'));
 
@@ -134,7 +134,7 @@
 
 
 				//防止过大或过小。
-				if(slideWidth>screenWidth && slideHeight>screenHeight || slideWidth<100 && slideHeight<100)
+				if(slideWidth>screenWidth+400 && slideHeight>screenHeight+400 || slideWidth<100 && slideHeight<100)
 					return ;
 
 				clone.stop(true,false).animate({
@@ -145,14 +145,14 @@
 				},'fast');
 				//returnToOrigin();
 			};
-			
+
 			//返回页面
 			function returnToOrigin(){
 				override = $("body .picboxed-override:last");
 				clone = override.find('img.picboxed');
 
 				if(document.removeEventListener){document.removeEventListener('DOMMouseScroll',scrollFunc,false);}
-				window.onmousewheel=document.onmousewhell=function(){};
+				window.onmousewheel=document.onmousewheel=function(){};
 
 				//返回的正常Top
 				var backTop = origin.offset().top-$(document).scrollTop();
@@ -182,5 +182,5 @@
 	}
 	$(document).ready(function(){
 		$('.picboxed').picboxed();
-	  });
+	});
 } ( jQuery ) );
